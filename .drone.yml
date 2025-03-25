@@ -1,0 +1,52 @@
+
+kind: pipeline
+type: docker
+name: FlaskDemo-CI
+steps:
+# 单元测试
+- name: unittest
+  image: python:3.7.3
+  commands:
+    - pip install -U pip
+    - pip install -r requirements-dev.txt
+    - make test
+# 静态代码分析
+- name: lint
+  image: python:3.7.3
+  commands:
+    - pip install -U pip
+    - pip install -r requirements-dev.txt
+    - make check
+---
+kind: pipeline
+type: docker
+name: FlaskDemo-CD
+steps:
+# 构建并发布镜像
+- name: publish
+  image: plugins/docker
+  settings:
+    insecure: true
+    registry: crpi-ybiyjqe4e2dzq5bj.cn-guangzhou.personal.cr.aliyuncs.com
+    repo: crpi-ybiyjqe4e2dzq5bj.cn-guangzhou.personal.cr.aliyuncs.com/orzsxc/flaskdemo
+    tags: ${DRONE_COMMIT}
+  when:
+    branch:
+      - master
+# 项目部署
+- name: deploy
+  image: appleboy/drone-ssh
+  settings:
+    host: 43.139.129.68
+    username: root
+    password: Sy18707327039@
+    port: 22
+    script:
+     - docker pull crpi-ybiyjqe4e2dzq5bj.cn-guangzhou.personal.cr.aliyuncs.com/orzsxc/flaskdemo:${DRONE_COMMIT}
+     # 如果不存在docker-demo，rm会报错
+     - docker rm -f  flaskdemo || true 
+     #
+     - docker run -d -p 5005:5000 --name flaskdemo crpi-ybiyjqe4e2dzq5bj.cn-guangzhou.personal.cr.aliyuncs.com/orzsxc/flaskdemo:${DRONE_COMMIT}
+     - echo "deploy success"
+
+
