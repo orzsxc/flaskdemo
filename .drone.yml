@@ -30,6 +30,7 @@ steps:
     registry: crpi-ybiyjqe4e2dzq5bj.cn-guangzhou.personal.cr.aliyuncs.com
     repo: crpi-ybiyjqe4e2dzq5bj.cn-guangzhou.personal.cr.aliyuncs.com/orzsxc/flaskdemo
     tags: ${DRONE_COMMIT}
+    registry_mirror: https://docker.1ms.run
   when:
     branch:
       - master
