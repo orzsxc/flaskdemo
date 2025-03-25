@@ -16,7 +16,7 @@ steps:
   commands:
     - pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package -U pip
     - pip install -r requirements-dev.txt
-    - make check
+    - make check V=1
 ---
 kind: pipeline
 type: docker
