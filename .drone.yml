@@ -33,6 +33,8 @@ steps:
     password: shengyong10086
     repo: crpi-ybiyjqe4e2dzq5bj.cn-guangzhou.personal.cr.aliyuncs.com/orzsxc/flaskdemo
     tags: ${DRONE_COMMIT}
+    pull_image: false
+    dockerfile: ./Dockerfile
   when:
     branch:
       - master
