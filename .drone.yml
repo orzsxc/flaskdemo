@@ -26,7 +26,7 @@ steps:
 - name: publish
   image: plugins/docker
   settings:
-    insecure: true
+    insecure: false
     registry_mirror: https://docker.1ms.run
     registry: crpi-ybiyjqe4e2dzq5bj.cn-guangzhou.personal.cr.aliyuncs.com
     username: 564359147@qq.com
