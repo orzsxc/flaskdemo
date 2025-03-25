@@ -47,6 +47,7 @@ steps:
     password: Sy18707327039@
     port: 22
     script:
+     - docker login --username=564359147@qq.com --password=shengyong10086 crpi-ybiyjqe4e2dzq5bj.cn-guangzhou.personal.cr.aliyuncs.com
      - docker pull crpi-ybiyjqe4e2dzq5bj.cn-guangzhou.personal.cr.aliyuncs.com/orzsxc/flaskdemo:${DRONE_COMMIT}
      # 如果不存在docker-demo，rm会报错
      - docker rm -f  flaskdemo || true 
